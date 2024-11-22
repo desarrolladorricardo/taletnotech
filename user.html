@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es-CO">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>League of Legends</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: url('https://www.kapapps.com/media/ziump3ba/league-of-legends.jpg?format=WebP&quality=50&v=1d9daaf46deaa70') no-repeat center center fixed;
+            background-size: cover;
+            color: rgb(227, 27, 27);
+        }
+        .modal-content {
+            background-color: rgba(0, 0, 0, 0.8);
+            color: white;
+        }
+        .modal-header {
+            border-bottom: none;
+        }
+        .modal-footer {
+            border-top: none;
+        }
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+        }
+        .btn-secondary {
+            background-color: #6c757d;
+            border-color: #6c757d;
+        }
+        .btn-secondary:hover {
+            background-color: #5a6268;
+            border-color: #5a6268;
+        }
+    </style>
+</head>
+<body>
+    <div class="container text-center mt-5">
+        <h1>League of Legends</h1>
+        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#loginModal">Ingresar</button>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                   <h5 class="modal-title" id="loginModalLabel" style="color: green;">Iniciar Sesión</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form method="POST" action="/login">
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label for="username" class="form-label">Usuario</label>
+                            <input type="text" class="form-control" id="username" name="username" required>
+                            <div id="usernameError" class="invalid-feedback"></div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Contraseña</label>
+                            <input type="password" class="form-control" id="password" name="password" required>
+                            <div id="passwordError" class="invalid-feedback"></div>
+                        </div>
+                        <div id="loginError" class="alert alert-danger" style="display: none;"></div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Ingresar</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const loginForm = document.querySelector('#loginModal form');
+        const usernameInput = document.querySelector('#username');
+        const passwordInput = document.querySelector('#password');
+        const usernameError = document.querySelector('#usernameError');
+        const passwordError = document.querySelector('#passwordError');
+        const loginError = document.querySelector('#loginError');
+
+        loginForm.addEventListener('submit', (e) => {
+            const username = usernameInput.value.trim();
+            const password = passwordInput.value.trim();
+
+            if (username === '' || password === '') {
+                e.preventDefault();
+                if (username === '') {
+                    usernameError.textContent = 'El usuario es obligatorio';
+                    usernameInput.classList.add('is-invalid');
+                } else {
+                    usernameError.textContent = '';
+                    usernameInput.classList.remove('is-invalid');
+                }
+                if (password === '') {
+                    passwordError.textContent = 'La contraseña es obligatoria';
+                    passwordInput.classList.add('is-invalid');
+                } else {
+                    passwordError.textContent = '';
+                    passwordInput.classList.remove('is-invalid');
+                }
+            } else {
+                // Aquí puedes agregar la lógica para verificar el usuario y contraseña
+                // Si el usuario o contraseña son incorrectos, puedes mostrar un mensaje de error
+                // loginError.textContent = 'Usuario o contraseña incorrectos';
+                // loginError.style.display = 'block';
+            }
+        });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
